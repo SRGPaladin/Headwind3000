@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour {
 	
 	public float startingSimulatedSpeed;
 
+	public GUIText timerText;
+	private float timer = 0.0f;
+
 	//speeds of spawned enemies
 	private const float basicEnemySpeed = 70f;
 
@@ -29,6 +32,10 @@ public class GameController : MonoBehaviour {
     }
 
 	private void Update() {
+
+		timer += Time.deltaTime;
+		timerText.text = "Time: " + timer;
+		
 		//to reflect mesh dimensions
 		const float wallSpeedToOffset = 1f/(500f/30f);
 		const float floorSpeedToOffset = 1f/(500f/20f);
@@ -47,7 +54,7 @@ public class GameController : MonoBehaviour {
                 Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnValues.x, spawnValues.x),
 					transform.position.y + Random.Range(-spawnValues.y, spawnValues.y), transform.position.z);
                 Quaternion spawnRotation = Quaternion.identity;
-                GameObject enemy = Instantiate(hazard, spawnPosition, spawnRotation);
+				GameObject enemy = Instantiate(hazard, spawnPosition, spawnRotation);
 
 				//set the new enemy's speed; for now, only spawning basic enemies
 				enemy.GetComponent<Rigidbody>().velocity = transform.forward * -(currentSimulatedSpeed + basicEnemySpeed);
@@ -62,4 +69,5 @@ public class GameController : MonoBehaviour {
             yield return new WaitForSeconds (waveWait);
         }
     }
+
 }

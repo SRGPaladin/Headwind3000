@@ -8,10 +8,9 @@ public class DestroyByContact : MonoBehaviour {
     {
         if (other.tag == "Boundary")
         {
-            return;
+			return;
         }
-        Destroy(other.gameObject);
-        Destroy(gameObject);
+		Time.timeScale = 0;
     }
 
 }
