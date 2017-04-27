@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-	float timebetweengroundandquit = 1.0f;
+	float timebetweengroundandquit = 3.0f;
 	public GameObject hazard;
     public Vector3 spawnValues;
     public int hazardCount;
@@ -45,13 +45,11 @@ public class GameController : MonoBehaviour {
     }
 
 	private void Update() {
-
-		timer += Time.deltaTime;
 		timerText.text = "Time: " + timer;
 
 		if (restart) 
 		{
-			if (Input.GetKeyDown (KeyCode.R)) 
+			if (Input.anyKeyDown) 
 			{
 				Time.timeScale = 1;
 				SceneManager.LoadScene ("StartMenu", LoadSceneMode.Single);
@@ -64,6 +62,9 @@ public class GameController : MonoBehaviour {
 				Time.timeScale = 0;
 				GameOver();
 			}
+		}
+		else {
+			timer += Time.deltaTime;
 		}
 
 		//to reflect mesh dimensions
@@ -103,7 +104,8 @@ public class GameController : MonoBehaviour {
 
 	public void GameOver ()
 	{
-		restartText.text = "Press 'R' for Restart";
+		//restartText.text = "Press 'R' for Restart";
+		gameOverText.text = "Game Over! You lasted: "+timer + "\nPress any key to continue.";
 		restart = true;
 	}
 }

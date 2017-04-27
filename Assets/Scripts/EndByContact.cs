@@ -31,10 +31,10 @@ public class EndByContact : MonoBehaviour
 
 		if(!(collision.gameObject.tag == "Ceiling")){
 			playerController.crash();
+			gameController.ended = true;
 
 			//end game if collided with floor
 			if (collision.gameObject.tag == "Floor") {
-				gameController.ended = true;
 				playerController.ignite();
 			}
 		}
