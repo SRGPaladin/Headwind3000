@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EndByContact : MonoBehaviour 
 {
-	float timeLeft = 2.0f;
+	float timeLeft = 1.0f;
 	bool end = false;
 	private GameController gameController;
 
@@ -34,7 +34,7 @@ public class EndByContact : MonoBehaviour
 		    timeLeft -= Time.deltaTime;
 			if (timeLeft < 0) 
 			{
-				Time.timeScale = 0;
+				//Time.timeScale = 0;
 				gameController.GameOver ();
 			}
 		}
