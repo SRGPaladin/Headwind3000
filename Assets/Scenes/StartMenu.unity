@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667555, g: 0.48427176, b: 0.56452405, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 297113629}
   - component: {fileID: 297113628}
   - component: {fileID: 297113627}
+  - component: {fileID: 297113626}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -142,6 +143,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!45 &297113626
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 297113625}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 058636cbfa6ad0042b4770be84d6bc97, type: 2}
 --- !u!81 &297113627
 AudioListener:
   m_ObjectHideFlags: 0
@@ -171,7 +180,7 @@ Camera:
   m_GameObject: {fileID: 297113625}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0.12867646, b: 0.33088237, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -245,7 +254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 180}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &311133271

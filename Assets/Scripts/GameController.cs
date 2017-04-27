@@ -53,8 +53,8 @@ public class GameController : MonoBehaviour {
 		{
 			if (Input.GetKeyDown (KeyCode.R)) 
 			{
-				SceneManager.LoadScene ("StartMenu");
 				Time.timeScale = 1;
+				SceneManager.LoadScene ("StartMenu", LoadSceneMode.Single);
 			}
 		}
 
@@ -98,15 +98,6 @@ public class GameController : MonoBehaviour {
 			currentSimulatedSpeed += 0.2f*startingSimulatedSpeed;
 
             yield return new WaitForSeconds (waveWait);
-
-			if (gameOver) 
-			{
-				Time.timeScale = 0;
-				gameOverText.text = "Game Over! Survive Time: " + timer + "s";
-				restartText.text = "Press 'R' for Restart";
-				restart = true;
-				break;
-			}
         }
     }
 

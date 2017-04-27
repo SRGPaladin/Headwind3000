@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Boundary
   - Floor
+  - Fire
+  - Ceiling
   layers:
   - Default
   - TransparentFX

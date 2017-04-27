@@ -57,6 +57,10 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void ignite() {
+		firesystem.Play();
+	}
+
 	void FixedUpdate () {
 		if(!crashed){
 			float moveHorizontal = Input.GetAxis("Horizontal");
