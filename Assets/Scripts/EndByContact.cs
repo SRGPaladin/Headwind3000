@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EndByContact : MonoBehaviour 
 {
-	float timeLeft = 2.0f;
-	bool end = false;
+	//moved to controller
+	//float timeLeft = 2.0f;
+
 	private GameController gameController;
+	PlayerController playerController;
 
 	void Start ()
 	{
@@ -19,24 +21,23 @@ public class EndByContact : MonoBehaviour
 		{
 			Debug.Log ("Cannot find GameController");
 		}
-	
+
+		//get pointers
+
+		playerController = gameObject.GetComponent<PlayerController>();
 	}
 
-	void OnCollisionEnter(Collision collision) 
-	{
-		end = true;
+	void OnCollisionEnter(Collision collision) {
+		playerController.crash();
+
+		//end game if collided with floor
+		if (collision.gameObject.tag == "Floor") {
+			gameController.ended = true;
+		}
 	}
 
 	void Update () 
 	{
-		if (end)
-		{
-		    timeLeft -= Time.deltaTime;
-			if (timeLeft < 0) 
-			{
-				Time.timeScale = 0;
-				gameController.GameOver ();
-			}
-		}
+		//moved game ending to game controller
 	}
 }

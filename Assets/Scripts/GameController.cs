@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    public GameObject hazard;
+	float timebetweengroundandquit = 1.0f;
+	public GameObject hazard;
     public Vector3 spawnValues;
     public int hazardCount;
     public float spawnWait;
@@ -19,8 +20,10 @@ public class GameController : MonoBehaviour {
 	public GUIText gameOverText;
 
 	private float timer = 0.0f;
-	private bool gameOver;
 	private bool restart;
+
+	//the game has ended!
+	public bool ended = false;
 
 	//speeds of spawned enemies
 	private const float basicEnemySpeed = 70f;
@@ -33,7 +36,6 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
-		gameOver = false;
 		restart = false;
 		restartText.text = "";
 		gameOverText.text = "";
@@ -50,6 +52,14 @@ public class GameController : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.R)) 
 			{
 				SceneManager.LoadScene("gameplay", LoadSceneMode.Additive);
+			}
+		}
+
+		if (ended) {
+			timebetweengroundandquit -= Time.deltaTime;
+			if (timebetweengroundandquit < 0) {
+				Time.timeScale = 0;
+				GameOver();
 			}
 		}
 
@@ -76,13 +86,6 @@ public class GameController : MonoBehaviour {
 				//set the new enemy's speed; for now, only spawning basic enemies
 				enemy.GetComponent<Rigidbody>().velocity = transform.forward * -(currentSimulatedSpeed + basicEnemySpeed);
 				yield return new WaitForSeconds(spawnWait);
-
-				if (gameOver) 
-				{
-					restartText.text = "Press 'R' for Restart";
-					restart = true;
-					break;
-				}
             }
 
 			//make the next wave more difficult
@@ -97,6 +100,7 @@ public class GameController : MonoBehaviour {
 	public void GameOver ()
 	{
 		gameOverText.text = "Game Over! Survive Time: " + timer + "s";
-		gameOver = true;
+		restartText.text = "Press 'R' for Restart";
+		restart = true;
 	}
 }
