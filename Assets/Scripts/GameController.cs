@@ -57,8 +57,8 @@ public class GameController : MonoBehaviour {
 		{
 			if (Input.GetKeyDown (KeyCode.R)) 
 			{
-				SceneManager.UnloadSceneAsync("gameplay");
-				SceneManager.LoadScene ("StartMenu", LoadSceneMode.Additive);
+				SceneManager.LoadScene ("StartMenu");
+				Time.timeScale = 1;
 			}
 		}
 	}
