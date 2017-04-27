@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
@@ -14,7 +15,12 @@ public class GameController : MonoBehaviour {
 	public float startingSimulatedSpeed;
 
 	public GUIText timerText;
+	public GUIText restartText;
+	public GUIText gameOverText;
+
 	private float timer = 0.0f;
+	private bool gameOver;
+	private bool restart;
 
 	//speeds of spawned enemies
 	private const float basicEnemySpeed = 70f;
@@ -27,6 +33,10 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
+		gameOver = false;
+		restart = false;
+		restartText.text = "";
+		gameOverText.text = "";
         StartCoroutine (SpawnWaves());
 		currentSimulatedSpeed = startingSimulatedSpeed;
     }
@@ -35,7 +45,14 @@ public class GameController : MonoBehaviour {
 
 		timer += Time.deltaTime;
 		timerText.text = "Time: " + timer;
-		
+		if (restart) 
+		{
+			if (Input.GetKeyDown (KeyCode.R)) 
+			{
+				SceneManager.LoadScene("gameplay", LoadSceneMode.Additive);
+			}
+		}
+
 		//to reflect mesh dimensions
 		const float wallSpeedToOffset = 1f/(500f/30f);
 		const float floorSpeedToOffset = 1f/(500f/20f);
@@ -59,6 +76,13 @@ public class GameController : MonoBehaviour {
 				//set the new enemy's speed; for now, only spawning basic enemies
 				enemy.GetComponent<Rigidbody>().velocity = transform.forward * -(currentSimulatedSpeed + basicEnemySpeed);
 				yield return new WaitForSeconds(spawnWait);
+
+				if (gameOver) 
+				{
+					restartText.text = "Press 'R' for Restart";
+					restart = true;
+					break;
+				}
             }
 
 			//make the next wave more difficult
@@ -70,4 +94,9 @@ public class GameController : MonoBehaviour {
         }
     }
 
+	public void GameOver ()
+	{
+		gameOverText.text = "Game Over! Survive Time: " + timer + "s";
+		gameOver = true;
+	}
 }
