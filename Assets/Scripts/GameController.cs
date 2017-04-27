@@ -47,12 +47,6 @@ public class GameController : MonoBehaviour {
 		timer += Time.deltaTime;
 		timerText.text = "Time: " + timer;
 
-		//to reflect mesh dimensions
-		const float wallSpeedToOffset = 1f/(500f/30f);
-		const float floorSpeedToOffset = 1f/(500f/20f);
-		buildingMaterial.mainTextureOffset -= new Vector2(currentSimulatedSpeed*wallSpeedToOffset*Time.deltaTime, 0);
-		floorMaterial.mainTextureOffset -= new Vector2(0, currentSimulatedSpeed * floorSpeedToOffset * Time.deltaTime);
-
 		if (restart) 
 		{
 			if (Input.GetKeyDown (KeyCode.R)) 
@@ -61,6 +55,12 @@ public class GameController : MonoBehaviour {
 				Time.timeScale = 1;
 			}
 		}
+
+		//to reflect mesh dimensions
+		const float wallSpeedToOffset = 1f/(500f/30f);
+		const float floorSpeedToOffset = 1f/(500f/20f);
+		buildingMaterial.mainTextureOffset -= new Vector2(currentSimulatedSpeed*wallSpeedToOffset*Time.deltaTime, 0);
+		floorMaterial.mainTextureOffset -= new Vector2(0, currentSimulatedSpeed * floorSpeedToOffset * Time.deltaTime);
 	}
 
 	IEnumerator SpawnWaves()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EndByContact : MonoBehaviour 
 {
-	float timeLeft = 1.0f;
+	float timeLeft = 0.5f;
 	bool end = false;
 	private GameController gameController;
 
